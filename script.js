@@ -1,18 +1,24 @@
 const gameBoard = (function () {
-  let board = [[null, null, null], [null, null, null], [null, null, null]];
+  const ticTacToeBoard = document.querySelector(".gameboard"); 
+  // this has to go to the playGame module
+  for (let i = 0; i < 9; i++) {
+    let square = document.createElement("div");
+    square.setAttribute("class", "square");
+    square.setAttribute("id", `${i}`);
+    // square.addEventListener("click", makeMove());
+    ticTacToeBoard.appendChild(square);
+  }
+  let board = [
+    "", "", "",
+    "", "", "",
+    "", "", ""
+  ];
   
   const getBoard = () => board;
   
-  const getCoordinates = () => {
-    const userInput = prompt('Insert row and columns (from 0 to 2), separated by a space: ').split(" ");
-    const coordinates = userInput.map(Number); // this will be a list of two integers; eg.--> coordinates = [0, 2]
-    return coordinates; 
-  }
-  
-  const makeMove = (coordinates, player) => { // player is the player's sign
-    const row = coordinates[0];
-    const column = coordinates[1];
-    board[row][column] = player; 
+  const makeMove = (e, player) => { // player is the player's sign
+    const boardIndex = e.getID;
+    board[boardIndex] = player; 
   }
   
   const isMoveValid = (move) => {
@@ -74,7 +80,7 @@ const gameLogic = (function () {
   return { increaseRound, getRound, switchPlayer, isGameOver, gameIsOver, getPlayer, winConditions };
 })();
 
-const playGame = (function () {
+/** const playGame = (function () {
   while (!gameLogic.isGameOver()) {
     const move = gameBoard.getCoordinates();
     
@@ -111,4 +117,4 @@ const playGame = (function () {
       console.log("Invalid move, try again.");
     }
   }
-})();
+})();**/
