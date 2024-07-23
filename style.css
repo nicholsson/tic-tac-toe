@@ -15,8 +15,12 @@ body{
   justify-content: space-evenly;
 }
 .square{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 33%;
   height: 33%;
   border: 1px solid red;
   box-sizing: border-box;
+  font-size: xx-large;
 }
