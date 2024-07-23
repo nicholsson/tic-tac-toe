@@ -12,12 +12,18 @@ const gameBoard = (function () {
     const sign = gameLogic.getPlayer().sign;
     board[boardIndex] = sign;
     e.target.textContent = sign;
+
     if (!gameLogic.isGameOver()){
       if (gameLogic.winConditions()){
+        playGame.speaker.textContent = `${sign} wins the match!`
         gameLogic.gameIsOver();
         gameLogic.stopGame();
+      } else if (board.every(cell => cell !== "")) {
+        gameLogic.gameIsOver();
+        playGame.speaker.textContent = "It's a tie!"
       } else {
         gameLogic.switchPlayer();
+        playGame.speaker.textContent = `It's ${gameLogic.getPlayer().sign}'s turn`
       }
     }
     e.target.removeEventListener("click", handleMove);
@@ -76,4 +82,5 @@ const playGame = (function () {
     ticTacToeBoard.appendChild(square);
     square.addEventListener("click", gameBoard.handleMove);
   }
+  return { speaker }
 })();
